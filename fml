@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    let sapp = document.getElementById('app')
+    let t1 = document.createElement('h1')
+
+    let sp1 = document.createElement('span')
+    let sp2 = document.createElement('span')
+    let sp3 = document.createElement('span')
+
+    sp1.style.marginRight = '20px'
+    sp2.style.marginRight = '20px'
+    sp3.style.marginRight = '20px'
+
+    let div1 = document.createElement('div')
+    div1.style.marginBottom = '20px'
+    let div2 = document.createElement('div')
+    div2.style.marginBottom = '20px'
+    let div3 = document.createElement('div')
+    div3.style.marginBottom = '20px'
+    let div4 = document.createElement('div')
+    div4.style.marginBottom = '20px'
+    let div5 = document.createElement('div')
+    div5.style.marginBottom = '20px'
+    let div6 = document.createElement('div')
+    div6.style.marginBottom = '20px'
+    let div7 = document.createElement('div')
+
+
+    sp1.innerText = 'firstname'
+    sp2.innerText = 'middlename'
+    sp3.innerText = 'lastname'
+
+    let cc = document.createElement('center')
+
+    let inf1 = document.createElement('input')
+    let inf2 = document.createElement('input')
+    let inf3 = document.createElement('input')
+    let inf4 = document.createElement('input')
+    let inf5 = document.createElement('input')
+    let inf6 = document.createElement('input')
+
+    inf1.addEventListener('input', function(event){
+      sp1.innerText = event.target.value  
+    })
+    inf1.placeholder = 'firstname'
+    inf2.addEventListener('input', function(event){
+      sp2.innerText = event.target.value  
+    })
+    inf2.placeholder = 'middlename'
+    inf3.addEventListener('input', function(event){
+      sp3.innerText = event.target.value  
+    })
+
+    inf3.placeholder = 'lastname'
+    inf4.placeholder = 'email'
+    inf5.placeholder = 'password'
+    inf6.placeholder = 'retype-password'
+
+    inf4.addEventListener('input', function(event) {
+      let email = event.target.value
+      let emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      let isvalidemail = emailpattern.test(email)
+      if (!isvalidemail) {
+        event.target.setCustomValidity("Please enter a valid email address");
+        event.target.style.border = "1px solid red";
+      } else {
+        event.target.setCustomValidity("");
+        event.target.style.border = "";
+      }
+    });
+    inf4.type = 'email';
+
+    inf6.addEventListener('input', function(event) {
+      if (event.target.value !== inf5.value) {
+        event.target.setCustomValidity("Passwords do not match")
+        event.target.style.border = "1px solid red"
+        inf5.style.border = "1px solid red"
+      } else {
+        event.target.setCustomValidity("")
+        event.target.style.border = ""
+        inf5.style.border = ""
+      }
+    });
+    inf5.type = 'password';
+    inf6.type = 'password';
+
+    
+    let btn = document.createElement('input')
+    btn.type = 'checkbox'
+    let btnlabel = document.createElement('label')
+    btnlabel.innerHTML = 'Show password'
+    btn.addEventListener('click', function(){
+        if (inf5.type === 'password'){
+            inf5.type = 'text'
+            inf6.type = 'text'
+        }
+        else{
+            inf5.type = 'password'
+            inf6.type = 'password'
+        }
+    });
+
+    t1.append(sp1)
+    t1.append(sp2)
+    t1.append(sp3)
+
+    div1.append(inf1)
+    div2.append(inf2)
+    div3.append(inf3)
+    div4.append(inf4)
+    div5.append(inf5)
+    div6.append(inf6)
+    div7.append(btn)
+    div7.append(btnlabel)
+
+    cc.append(t1)
+    cc.append(div1)
+    cc.append(div2)
+    cc.append(div3)
+    cc.append(div4)
+    cc.append(div5)
+    cc.append(div6)
+    cc.append(div7)
+
+    sapp.append(cc)
+  </script>
+</body>
+</html>
