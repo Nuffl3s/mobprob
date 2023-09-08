@@ -14,6 +14,8 @@
     let sp1 = document.createElement('span')
     let sp2 = document.createElement('span')
     let sp3 = document.createElement('span')
+    let sp4 = document.createElement('span')
+    let sp5 = document.createElement('span')
 
     sp1.style.marginRight = '20px'
     sp2.style.marginRight = '20px'
@@ -32,11 +34,17 @@
     let div6 = document.createElement('div')
     div6.style.marginBottom = '20px'
     let div7 = document.createElement('div')
+    div7.style.marginBottom = '20px'
+    let div8 = document.createElement('div')
+    div8.style.marginBottom = '20px'
+    let div9 = document.createElement('div')
 
 
     sp1.innerText = 'firstname'
     sp2.innerText = 'middlename'
     sp3.innerText = 'lastname'
+    sp4.innerText = 'Please enter a valid email'
+    sp5.innerText = 'Enter Password'
 
     let cc = document.createElement('center')
 
@@ -59,6 +67,7 @@
       sp3.innerText = event.target.value  
     })
 
+
     inf3.placeholder = 'lastname'
     inf4.placeholder = 'email'
     inf5.placeholder = 'password'
@@ -69,24 +78,33 @@
       let emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       let isvalidemail = emailpattern.test(email)
       if (!isvalidemail) {
-        event.target.setCustomValidity("Please enter a valid email address");
-        event.target.style.border = "1px solid red";
+        sp4.innerText = "Invalid Email";
+        sp4.style.color = "red";
+        inf4.setCustomValidity("Please enter a valid email address");
+        inf4.style.border = "1px solid red";
       } else {
-        event.target.setCustomValidity("");
-        event.target.style.border = "";
+        sp4.innerText = "Valid Email";
+        sp4.style.color = "green";
+        inf4.setCustomValidity("");
+        inf4.style.border = "";
       }
     });
     inf4.type = 'email';
+    
 
     inf6.addEventListener('input', function(event) {
       if (event.target.value !== inf5.value) {
         event.target.setCustomValidity("Passwords do not match")
         event.target.style.border = "1px solid red"
         inf5.style.border = "1px solid red"
+        sp5.innerText = "Password do not match";
+        sp5.style.color = "red";
       } else {
         event.target.setCustomValidity("")
         event.target.style.border = ""
         inf5.style.border = ""
+        sp5.innerText = "Passowrd Matched";
+        sp5.style.color = "green";
       }
     });
     inf5.type = 'password';
@@ -115,11 +133,13 @@
     div1.append(inf1)
     div2.append(inf2)
     div3.append(inf3)
-    div4.append(inf4)
-    div5.append(inf5)
-    div6.append(inf6)
-    div7.append(btn)
-    div7.append(btnlabel)
+    div4.append(sp4)
+    div5.append(inf4)
+    div6.append(sp5)
+    div7.append(inf5)
+    div8.append(inf6)
+    div9.append(btn)
+    div9.append(btnlabel)
 
     cc.append(t1)
     cc.append(div1)
@@ -129,6 +149,8 @@
     cc.append(div5)
     cc.append(div6)
     cc.append(div7)
+    cc.append(div8)
+    cc.append(div9)
 
     sapp.append(cc)
   </script>
