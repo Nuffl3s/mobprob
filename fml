@@ -6,17 +6,20 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+  </div>
   <script>
     let sapp = document.getElementById('app')
-    let t1 = document.createElement('h1')
+    let t0 = document.createElement('h1')
+    let t1 = document.createElement('h2')
 
+    let t = document.createElement('span')
     let sp1 = document.createElement('span')
     let sp2 = document.createElement('span')
     let sp3 = document.createElement('span')
     let sp4 = document.createElement('span')
     let sp5 = document.createElement('span')
-
+    
     sp1.style.marginRight = '20px'
     sp2.style.marginRight = '20px'
     sp3.style.marginRight = '20px'
@@ -39,7 +42,7 @@
     div8.style.marginBottom = '20px'
     let div9 = document.createElement('div')
 
-
+    t.innerText = 'Registration Form'
     sp1.innerText = 'firstname'
     sp2.innerText = 'middlename'
     sp3.innerText = 'lastname'
@@ -56,15 +59,18 @@
     let inf6 = document.createElement('input')
 
     inf1.addEventListener('input', function(event){
-      sp1.innerText = event.target.value  
+      sp1.innerText = event.target.value
+      data.firstname = event.target.value  
     })
     inf1.placeholder = 'firstname'
     inf2.addEventListener('input', function(event){
       sp2.innerText = event.target.value  
+      data.middlename = event.target.value 
     })
     inf2.placeholder = 'middlename'
     inf3.addEventListener('input', function(event){
       sp3.innerText = event.target.value  
+      data.lastname = event.target.value 
     })
 
 
@@ -87,20 +93,40 @@
         sp4.style.color = "green";
         inf4.setCustomValidity("");
         inf4.style.border = "";
+        data.email = event.target.value 
       }
     });
     inf4.type = 'email';
     
+        function passwordcheck(password) {
+    let minLength = 8;
+    let uppercase = /[A-Z]/.test(password);
+    let symbols = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
+
+    if (password.length < minLength) {
+    sp5.innerText = "Weak password";
+    inf6.disabled = true; 
+  } else if (password.length >= minLength && uppercase && symbols) {
+    sp5.innerText = "Strong password";
+    inf6.disabled = false; 
+  } else {
+    sp5.innerText = "Good password";
+    inf6.disabled = false; 
+  }
+    }
+
+    inf5.addEventListener("input", function(event) {
+    let password = event.target.value;
+    passwordcheck(password);
+    });
 
     inf6.addEventListener('input', function(event) {
       if (event.target.value !== inf5.value) {
-        event.target.setCustomValidity("Passwords do not match")
         event.target.style.border = "1px solid red"
         inf5.style.border = "1px solid red"
         sp5.innerText = "Password do not match";
         sp5.style.color = "red";
       } else {
-        event.target.setCustomValidity("")
         event.target.style.border = ""
         inf5.style.border = ""
         sp5.innerText = "Passowrd Matched";
@@ -126,6 +152,29 @@
         }
     });
 
+    let data = {
+        'firstname' : '',
+        'middlename' : '',
+        'lastname' : '',
+        'email' : '',
+        'password' : ''
+    }
+
+    let submitbtn = document.createElement('button')
+    submitbtn.addEventListener('click', function(event){
+    if(inf1.value === '' || inf2.value === '' || inf3.value === '' || inf4.value === '' || inf5.value === '' || inf6.value === ''){
+        console.log('invalid')
+    } else if (sp4.innerText === "Invalid Email" || sp5.innerText === "Weak password" || sp5.innerText === "Passwords do not match") {
+        console.log('invalid');
+    } else {
+        data.password = inf5.value;
+        console.log(data);
+    }
+    })
+
+    submitbtn.innerText = 'submit'
+
+    t0.append(t)
     t1.append(sp1)
     t1.append(sp2)
     t1.append(sp3)
@@ -141,6 +190,7 @@
     div9.append(btn)
     div9.append(btnlabel)
 
+    cc.append(t0)
     cc.append(t1)
     cc.append(div1)
     cc.append(div2)
@@ -152,6 +202,7 @@
     cc.append(div8)
     cc.append(div9)
 
+    cc.append(submitbtn)
     sapp.append(cc)
   </script>
 </body>
