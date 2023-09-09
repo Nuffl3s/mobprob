@@ -98,28 +98,24 @@
     });
     inf4.type = 'email';
     
-        function passwordcheck(password) {
-    let minLength = 8;
-    let uppercase = /[A-Z]/.test(password);
-    let symbols = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
+    function passwordcheck(password) {
+    let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
-    if (password.length < minLength) {
-    sp5.innerText = "Weak password";
-    inf6.disabled = true; 
-  } else if (password.length >= minLength && uppercase && symbols) {
-    sp5.innerText = "Strong password";
-    inf6.disabled = false; 
-  } else {
-    sp5.innerText = "Good password";
-    inf6.disabled = false; 
-  }
+    if (regex.test(password)) {
+        sp5.innerText = "Strong password";
+        sp5.style.color = "green"
+        inf6.disabled = false; 
+    } else {
+        sp5.innerText = "Weak password";
+        sp5.style.color = "red"
+        inf6.disabled = true; 
+    }
     }
 
     inf5.addEventListener("input", function(event) {
-    let password = event.target.value;
-    passwordcheck(password);
+        let password = event.target.value;
+        passwordcheck(password);
     });
-
     inf6.addEventListener('input', function(event) {
       if (event.target.value !== inf5.value) {
         event.target.style.border = "1px solid red"
